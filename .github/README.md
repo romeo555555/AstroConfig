@@ -16,17 +16,10 @@ mv ~/.local/share/nvim ~/.local/share/nvim.bak
 ```shell
 git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
 ```
-
-#### Create a new user repository from this template
-
-Press the "Use this template" button above to create a new repository to store your user configuration.
-
-You can also just clone this repository directly if you do not want to track your user configuration in GitHub.
-
-#### Clone the repository
+#### Clone this repository
 
 ```shell
-git clone https://github.com/<your_user>/<your_repository> ~/.config/nvim/lua/user
+git clone https://github.com/romeo555555/AstroConfig ~/.config/nvim/lua/
 ```
 
 #### Start Neovim

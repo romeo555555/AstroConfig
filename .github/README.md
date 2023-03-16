@@ -27,3 +27,10 @@ git clone https://github.com/romeo555555/AstroConfig ~/.config/nvim/lua/
 ```shell
 nvim
 ```
+
+in nvim
+
+```shell
+:LspInstall rust
+:TSInstall rust
+```

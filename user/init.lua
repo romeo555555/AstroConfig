@@ -17,7 +17,11 @@ return {
     },
   },
   -- Set colorscheme to use
-  colorscheme = "terafox", --"astrodark",
+  colorscheme = "oxocarbon",
+  -- colorscheme = "github_dark",
+  -- colorscheme = "github_dimmed",
+  -- colorscheme = "gruvbox",
+  -- colorscheme = "terafox", --"astrodark",
   -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
   diagnostics = {
     virtual_text = true,
@@ -26,6 +30,8 @@ return {
   lsp = {
     -- customize lsp formatting options
     setup_handlers = {
+      --
+      dartls = function(_, opts) require("flutter-tools").setup { lsp = opts } end,
       -- add custom handler
       rust_analyzer = function(_, opts)
         require("rust-tools").setup {
@@ -74,7 +80,31 @@ return {
     },
     -- enable servers that you already have installed without mason
     servers = {
-      -- "pyright"
+      "prosemd",
+      "dartls",
+    },
+    config = {
+      prosemd = function()
+        return {
+          -- cmd = { "/usr/local/bin/prosemd-lsp", "--stdio" },
+          cmd = { "/home/x/.cargo/bin/prosemd-lsp", "--stdio" },
+          filetypes = { "markdown" },
+          root_dir = function(fname)
+            return require("lspconfig.util").find_git_ancestor(fname) or vim.fn.getcwd()
+          end,
+          -- settings = {},
+        }
+      end,
+      dartls = {
+        -- any changes you want to make to the LSP setup, for example
+        color = {
+          enabled = true,
+        },
+        settings = {
+          showTodos = true,
+          completeFunctionCalls = true,
+        },
+      },
     },
   },
   -- Configure require("lazy").setup() options

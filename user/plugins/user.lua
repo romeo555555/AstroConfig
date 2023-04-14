@@ -36,7 +36,64 @@ return {
       })
     end
   },
+  {
+    'projekt0n/github-nvim-theme',
+    tag = 'v0.0.7',
+    config = function()
+      require('github-theme').setup({
+        -- theme_style = "dark",
+        -- function_style = "italic",
+        -- sidebars = { "qf", "vista_kind", "terminal", "packer" },
+        -- -- Change the "hint" color to the "orange" color, and make the "error" color bright red
+        -- colors = { hint = "orange", error = "#ff0000" },
+        -- -- Overwrite the highlight groups
+        -- overrides = function(c)
+        --   return {
+        --     htmlTag = { fg = c.red, bg = "#282c34", sp = c.hint, style = "underline" },
+        --     DiagnosticHint = { link = "LspDiagnosticsDefaultHint" },
+        --     -- this will remove the highlight groups
+        --     TSField = {},
+        --   }
+        -- end
+      })
+    end
+  },
+  {
+    "ellisonleao/gruvbox.nvim",
+    config = function()
+      require("gruvbox").setup({
+        -- undercurl = true,
+        -- underline = true,
+        -- bold = true,
+        -- italic = {
+        --   strings = true,
+        --   comments = true,
+        --   operators = false,
+        --   folds = true,
+        -- },
+        -- strikethrough = true,
+        -- invert_selection = false,
+        -- invert_signs = false,
+        -- invert_tabline = false,
+        -- invert_intend_guides = false,
+        -- inverse = true, -- invert background for search, diffs, statuslines and errors
+        -- contrast = "",  -- can be "hard", "soft" or empty string
+        -- palette_overrides = {},
+        -- overrides = {},
+        -- dim_inactive = false,
+        -- transparent_mode = false,
+      })
+    end
+  },
+  { 'nyoom-engineering/oxocarbon.nvim' },
   { "EdenEast/nightfox.nvim" },
+
+  {
+    "akinsho/flutter-tools.nvim",
+    dependencies = { "plenary.nvim",
+      -- 'stevearc/dressing.nvim', -- optional for vim.ui.select
+    },
+  },
   {
     "simrat39/rust-tools.nvim",
     dependencies = "mason-lspconfig.nvim",

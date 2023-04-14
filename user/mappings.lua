@@ -6,12 +6,19 @@
 return {
   -- first key is the mode
   n = {
-    L = { function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
-      desc = "Next buffer" },
-    H = { function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
-      desc = "Previous buffer" },
+    L = {
+      function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
+      desc = "Next buffer"
+    },
+    H = {
+      function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
+      desc = "Previous buffer"
+    },
     -- second key is the lefthand side of the map
     -- mappings seen under group name "Buffer"
+    -- tables with the `name` key will be registered with which-key if it's installed
+    -- this is useful for naming menus
+    ["<leader>b"] = { name = "Buffers" },
     ["<leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" },
     ["<leader>bD"] = {
       function()
@@ -22,18 +29,6 @@ return {
       end,
       desc = "Pick to close",
     },
-    ["<C-b>"] = { function() require("telescope.builtin").buffers() end },
-    ["<C-i>"] = { function()
-      local aerial_avail, _ = pcall(require, "aerial")
-      if aerial_avail then
-        require("telescope").extensions.aerial.aerial()
-      else
-        require("telescope.builtin").lsp_document_symbols()
-      end
-    end },
-    -- tables with the `name` key will be registered with which-key if it's installed
-    -- this is useful for naming menus
-    ["<leader>b"] = { name = "Buffers" },
     ["<leader>r"] = { name = "Rust" },
     ["<leader>ra"] = { "<cmd>RustCodeAction<cr>", desc = "Code action" },
     ["<leader>ry"] = { function() require("rust-tools").hover_range.hover_range() end, desc = "Hover range" },
@@ -53,6 +48,45 @@ return {
     -- ["<C-T>"] = { function() require('telekasten').toggle_todo() end },
     -- quick save
     -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
+    ["<C-b>"] = { function() require("telescope.builtin").buffers() end },
+    ["<C-i>"] = { function()
+      local aerial_avail, _ = pcall(require, "aerial")
+      if aerial_avail then
+        require("telescope").extensions.aerial.aerial()
+      else
+        require("telescope.builtin").lsp_document_symbols()
+      end
+    end },
+    require("which-key").register({
+      ["<C-x>c"] = { ":e ~/.config/nvim/lua/user/init.lua<cr>", "conf_init" },
+      ["<C-x>m"] = { ":e ~/.config/nvim/lua/user/mappings.lua.lua<cr>", "conf_mapping" },
+      ["<C-x>n"] = { ":e ~/Notes/main.md<cr>", "notice" },
+      -- ["<C-Z>f"] = { name = "+file" },
+      -- ["<C-Z>ff"] = { "<cmd>Telescope find_files<cr>", "Find File" },
+      -- ["<C-Z>fr"] = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
+      -- ["<C-Z>fn"] = { "<cmd>enew<cr>", "New File" },
+    }),
+    -- ["<C-z>"] = { name = " LSP" },
+    -- require("which-key").register({
+    --   ["<C-z>a"] = {
+    --     function() vim.lsp.buf.workspace_symbol() end,
+    --     "Search workspace symbols",
+    --   },
+    --   --   maps.n["<leader>lD"] = { function() require("telescope.builtin").diagnostics() end, desc = "Search diagnostics" }
+    --   --   maps.n["<leader>ls"] = {
+    --   --     function()
+    --   --       local aerial_avail, _ = pcall(require, "aerial")
+    --   --       if aerial_avail then
+    --   --         require("telescope").extensions.aerial.aerial()
+    --   --       else
+    --   --         require("telescope.builtin").lsp_document_symbols()
+    --   --       end
+    --   --     end,
+    --   --     desc = "Search symbols",
+    --   --   }
+    --   -- end
+    -- }),
+
   },
   t = {
     -- setting a mapping to false will disable it
